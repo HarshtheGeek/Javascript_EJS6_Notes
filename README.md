@@ -4,6 +4,7 @@
 
 - [History and Evolution of JavaScript](#01-history-and-evolution-of-javascript)
 - [Working of JS](#02-working-of-js)
+- [Client-side vs Server-side JavaScript](#03-client-side-vs-server-side-javascript)
 
 
 
@@ -495,7 +496,7 @@ To solve this problem, every browser contains a **JavaScript Engine** whose job 
 
 ---
 
-# 2. Browser Architecture
+# Browser Architecture
 
 A browser is not a single program. It is a collection of multiple components working together.
 
@@ -615,7 +616,7 @@ to improve website performance.
 
 ---
 
-# 3. What Happens When You Visit a Website?
+# What Happens When You Visit a Website?
 
 Suppose you type
 
@@ -711,7 +712,7 @@ Now the browser has the JavaScript code.
 
 ---
 
-# 4. Why Can't the Browser Execute JavaScript Directly?
+# Why Can't the Browser Execute JavaScript Directly?
 
 Suppose app.js contains
 
@@ -743,7 +744,7 @@ This is where the **JavaScript Engine** comes in.
 
 ---
 
-# 5. Role of the JavaScript Engine
+# Role of the JavaScript Engine
 
 The JavaScript engine acts like a translator between JavaScript code and the CPU.
 
@@ -777,7 +778,7 @@ Its responsibilities include:
 
 ---
 
-# 6. Different JavaScript Engines
+# Different JavaScript Engines
 
 Different browsers have different JavaScript engines.
 
@@ -793,7 +794,7 @@ Although the engines are different, they all implement the **ECMAScript specific
 
 ---
 
-# 7. How the JavaScript Engine Works
+# How the JavaScript Engine Works
 
 The engine follows several steps before your code is executed.
 
@@ -983,7 +984,7 @@ Print 30
 ```
 ---
 
-# 8. Important Clarification: JavaScript vs Browser APIs
+# Important Clarification: JavaScript vs Browser APIs
 
 Many beginners think everything they use in JavaScript comes from the language itself. This is incorrect.
 
@@ -1051,16 +1052,64 @@ the JavaScript engine recognizes the syntax, but it relies on the browser to per
 
 ---
 
-# 10. Key Takeaways
+# 03 Client-side vs Server-side JavaScript
 
-* JavaScript is a high-level language and cannot be executed directly by the CPU.
-* Every browser includes a JavaScript engine to translate JavaScript into machine code.
-* Different browsers use different JavaScript engines (V8, SpiderMonkey, JavaScriptCore), but all follow the ECMAScript specification.
-* Before execution, JavaScript goes through several stages: **Tokenization → Parsing → AST Creation → JIT Compilation → Execution**.
-* The JavaScript engine is responsible for parsing, compiling, executing, memory management, and optimization.
-* Features such as `document`, `window`, `fetch()`, `console`, and `setTimeout()` are **Browser APIs**, not part of the JavaScript language itself.
+| Feature | Client-side JavaScript | Server-side JavaScript |
+|---------|-------------------------|-------------------------|
+| **Definition** | JavaScript that runs inside the user's web browser. | JavaScript that runs on a server before sending a response to the client. |
+| **Execution Environment** | Browser (Chrome, Firefox, Edge, Safari, etc.) | Server runtime like **Node.js**, **Deno**, or **Bun** |
+| **Purpose** | Makes web pages interactive and responsive. | Handles business logic, APIs, databases, authentication, and server operations. |
+| **Executed By** | Browser's JavaScript Engine (V8, SpiderMonkey, JavaScriptCore, etc.) | Server-side JavaScript Runtime (Node.js, Deno, Bun) |
+| **Access to DOM** | Yes, can manipulate HTML and CSS using the DOM. | No, there is no browser DOM on the server. |
+| **Access to Browser APIs** | Yes (Local Storage, Session Storage, Geolocation, Fetch, Notifications, etc.) | No browser APIs. Has access to server APIs like File System, Process, OS, Network, etc. |
+| **Database Access** | Cannot directly access databases securely. | Can connect directly to databases (MongoDB, MySQL, PostgreSQL, Redis, etc.). |
+| **File System Access** | Very limited for security reasons. | Full access to the server's file system (with permissions). |
+| **Visibility of Code** | Source code is downloaded and visible to users. | Source code remains hidden on the server. |
+| **Security** | Less secure since users can inspect or modify the code. | More secure because code never leaves the server. |
+| **Performance** | Uses the client's CPU and memory. | Uses the server's CPU and memory. |
+| **Network Requests** | Sends requests to the server using Fetch or XMLHttpRequest. | Receives requests, processes them, and sends responses. |
+| **Typical Tasks** | Form validation, animations, DOM manipulation, UI updates, event handling. | Authentication, authorization, CRUD operations, API development, payment processing, sending emails. |
+| **Examples** | Button clicks, image sliders, dark mode, client-side validation. | Express.js APIs, login system, database queries, file uploads, JWT generation. |
+| **Frameworks/Libraries** | React, Angular, Vue, Svelte, Next.js (Frontend). | Express.js, NestJS, Fastify, Hono, Koa. |
 
----
+## Flow
+
+```text
+Client-side JavaScript
+
+User
+   │
+   ▼
+Browser
+   │
+Runs JavaScript
+   │
+Updates UI (DOM)
+   │
+(Optional)
+   ▼
+Sends API Request
+````
+
+```text
+Server-side JavaScript
+
+Browser
+   │
+HTTP Request
+   ▼
+Server (Node.js)
+   │
+Business Logic
+   │
+Database/File System
+   │
+HTTP Response
+   ▼
+Browser
+```
+
+
 
 
 
