@@ -1,11 +1,10 @@
 # Javascript_EJS6_Notes
 
-JavaScript-Notes/
-│
-├── README.md
-│
-├── 01-History-and-Evolution-of-JavaScript.md
-├── 02-How-JavaScript-Works.md
+# Table of Contents
+
+- [Introduction](#History-and-Evolution-of-JavaScript)
+- [Working of JS](#Working-of-JS)
+
 
 
 
@@ -13,26 +12,6 @@ JavaScript-Notes/
 # 01 - History and Evolution of JavaScript
 
 > "Before learning **how JavaScript works**, it is important to understand **why JavaScript was created in the first place**. Understanding its history helps explain many of the design decisions, strengths, and even the quirks of the language that developers encounter today."
-
----
-
-# Table of Contents
-
-- [Introduction](#introduction)
-- [The Web Before JavaScript](#the-web-before-javascript)
-- [Problems with Static Websites](#problems-with-static-websites)
-- [The Birth of JavaScript](#the-birth-of-javascript)
-- [Why Was It Named JavaScript?](#why-was-it-named-javascript)
-- [The Browser Wars](#the-browser-wars)
-- [The Need for Standardization](#the-need-for-standardization)
-- [What is ECMAScript?](#what-is-ecmascript)
-- [Evolution of JavaScript](#evolution-of-javascript)
-- [JavaScript Beyond the Browser](#javascript-beyond-the-browser)
-- [Modern JavaScript](#modern-javascript)
-- [Timeline of JavaScript](#timeline-of-javascript)
-- [Common Misconceptions](#common-misconceptions)
-- [Interview Questions](#interview-questions)
-- [Key Takeaways](#key-takeaways)
 
 ---
 
@@ -98,13 +77,7 @@ Suppose the user enters:
 harshgmail.com
 ```
 
-Notice that the email address is invalid because it is missing the `@` symbol.
-
-Today, the browser immediately displays an error message.
-
-However, before JavaScript existed, the browser had no way of checking whether the input was valid.
-
-Instead, the entire form was sent to the server.
+Notice that the email address is invalid because it is missing the `@` symbol. Today, the browser immediately displays an error message. However, before JavaScript existed, the browser had no way of checking whether the input was valid. Instead, the entire form was sent to the server.
 
 The process looked like this:
 
@@ -509,121 +482,12 @@ JavaScript has become one of the most versatile programming languages in the wor
 | **2015** | ECMAScript 6 (ES6) released |
 | **2016+** | Annual ECMAScript releases begin |
 
----
-
-# Common Misconceptions
-
-### JavaScript and Java are the same language.
-
-False.
-
-They are completely different programming languages.
 
 ---
 
-### JavaScript was created for backend development.
-
-False.
-
-It was originally created only for making webpages interactive.
-
----
-
-### ECMAScript is another programming language.
-
-False.
-
-ECMAScript is the specification that JavaScript implementations follow.
-
----
-
-### Every browser uses the same JavaScript engine.
-
-False.
-
-Different browsers have different JavaScript engines.
-
-Examples:
-
-- Chrome → V8
-- Firefox → SpiderMonkey
-- Safari → JavaScriptCore
-
----
-
-### JavaScript has always supported features like `let`, `const`, and arrow functions.
-
-False.
-
-These features were introduced in **ES6 (2015)**.
-
----
-
-# Interview Questions
-
-### Why was JavaScript created?
-
-To make webpages interactive by allowing browsers to execute logic without communicating with the server for every user interaction.
-
----
-
-### Who created JavaScript?
-
-Brendan Eich.
-
----
-
-### How long did it take to create JavaScript?
-
-Approximately 10 days.
-
----
-
-### Is JavaScript related to Java?
-
-No.
-
-The similarity exists only in the name.
-
----
-
-### What is ECMAScript?
-
-ECMAScript is the official specification that defines how JavaScript should behave.
-
----
-
-### Why was ECMAScript introduced?
-
-To standardize JavaScript and eliminate inconsistencies between browser implementations.
-
----
-
-### Why was ES6 considered a revolutionary update?
-
-Because it introduced many modern language features such as `let`, `const`, classes, modules, promises, destructuring, arrow functions, and template literals.
-
----
-
-### What role did Node.js play in JavaScript's evolution?
-
-Node.js allowed JavaScript to run outside the browser, enabling backend development and making JavaScript a full-stack programming language.
-
----
-
-# Key Takeaways
-
-- JavaScript was created in **1995** by **Brendan Eich**.
-- It was developed in approximately **10 days**.
-- Its original purpose was to make webpages interactive.
-- JavaScript and Java are completely different programming languages.
-- ECMAScript is the official specification for JavaScript.
-- ES6 (2015) transformed JavaScript into a modern programming language.
-- Node.js enabled JavaScript to run outside the browser, making full-stack JavaScript development possible.
-- Today, JavaScript is one of the most widely used programming languages across frontend, backend, mobile, desktop, cloud, and serverless development.
 
 
-## 1. JavaScript Runs Inside a Browser
+# 2. Working of JS
 
 JavaScript is a **high-level programming language**, which means it is written in a way that humans can easily understand. However, computers (specifically the CPU) cannot understand JavaScript directly. They can only execute **machine code (binary instructions)**.
 
