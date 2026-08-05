@@ -2,14 +2,14 @@
 
 # Table of Contents
 
-- [Introduction](#History-and-Evolution-of-JavaScript)
-- [Working of JS](#Working-of-JS)
+- [History and Evolution of JavaScript](#01-history-and-evolution-of-javascript)
+- [Working of JS](#02-working-of-js)
 
 
 
 
 
-# 01 - History and Evolution of JavaScript
+# 01 History and Evolution of JavaScript
 
 > "Before learning **how JavaScript works**, it is important to understand **why JavaScript was created in the first place**. Understanding its history helps explain many of the design decisions, strengths, and even the quirks of the language that developers encounter today."
 
@@ -487,7 +487,7 @@ JavaScript has become one of the most versatile programming languages in the wor
 
 
 
-# 2. Working of JS
+# 02 Working of JS
 
 JavaScript is a **high-level programming language**, which means it is written in a way that humans can easily understand. However, computers (specifically the CPU) cannot understand JavaScript directly. They can only execute **machine code (binary instructions)**.
 
