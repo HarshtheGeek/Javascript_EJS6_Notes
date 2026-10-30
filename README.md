@@ -7,6 +7,7 @@
 - [Client-side vs Server-side JavaScript](#03-client-side-vs-server-side-javascript)
 - [Variable Declarations](#4-variable-declarations)
 - [JavaScript Data Types](#5-javascript-data-types)
+- [Equality Operators (== vs ===)](#6-equality-operators)
 
 
 # 01 History and Evolution of JavaScript
@@ -1833,6 +1834,49 @@ Remember these important exceptions:
 
 ---
 
+# 06 Equality Operators (== vs ===)
+
+> "JavaScript provides two equality operators, `==` and `===`. Understanding the difference is important because one performs type coercion when necessary, while the other compares values without type conversion."
+
+### 1. Loose Equality (`==`)
+
+- Compares two values after performing type coercion when necessary.
+- JavaScript automatically converts types before comparison.
+
+```js
+console.log(10 == "10");  // true
+console.log(true == 1);   // true
+console.log(null == undefined); // true
+```
+
+### 2. Strict Equality (`===`)
+
+- Compares both value and data type.
+- Does not perform type coercion.
+- Returns `true` only when both operands have the same type and equal values.
+
+```js
+console.log(10 === "10"); // false
+console.log(true === 1);  // false
+console.log(null === undefined); // false
+```
+
+### 3. Important Exception: NaN
+
+- `NaN` (Not-a-Number) is not equal to itself.
+- Both `==` and `===` return `false` when comparing `NaN` with itself.
+- Use `Number.isNaN()` to check whether a value is `NaN`.
+
+```js
+console.log(NaN == NaN);  // false
+console.log(NaN === NaN); // false
+
+console.log(Number.isNaN(NaN)); // true
+```
+
+### 4. Best Practice
+
+- Prefer `===` over `==` to avoid unexpected type coercion.
 
 
 
