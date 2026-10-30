@@ -5,9 +5,8 @@
 - [History and Evolution of JavaScript](#01-history-and-evolution-of-javascript)
 - [Working of JS](#02-working-of-js)
 - [Client-side vs Server-side JavaScript](#03-client-side-vs-server-side-javascript)
-
-
-
+- [Variable Declarations](#4-variable-declarations)
+- [JavaScript Data Types](#5-javascript-data-types)
 
 
 # 01 History and Evolution of JavaScript
@@ -1108,6 +1107,735 @@ HTTP Response
    ▼
 Browser
 ```
+
+# 4. Variable Declarations
+
+JavaScript provides three keywords to declare variables:
+
+- `var`
+- `let`
+- `const`
+
+They differ in terms of scope, reassignment, redeclaration, and hoisting.
+
+## 4.1 var
+
+`var` is the older way of declaring variables in JavaScript.
+
+### Example
+
+```javascript
+var name = "Harsh";
+var age = 22;
+
+console.log(name);
+console.log(age);
+```
+
+### Characteristics
+
+- Function-scoped.
+- Can be reassigned.
+- Can be redeclared within the same scope.
+- Hoisted and initialized with `undefined`.
+- Does not follow block scope.
+
+### Example: Redeclaration
+
+```javascript
+var age = 22;
+var age = 23;
+
+console.log(age); // 23
+```
+
+Redeclaration is allowed with `var`.
+
+### Example: Block Scope
+
+```javascript
+if (true) {
+    var x = 10;
+}
+
+console.log(x); // 10
+```
+
+Even though `x` was declared inside the `if` block, it is accessible outside it.
+
+This happens because `var` is not block-scoped.
+
+---
+
+## 4.2 let
+
+`let` was introduced in ES6 (ECMAScript 2015).
+
+It allows variables to be reassigned but does not allow redeclaration within the same scope.
+
+### Example
+
+```javascript
+let name = "Harsh";
+
+name = "Rahul";
+
+console.log(name); // Rahul
+```
+
+### Characteristics
+
+- Block-scoped.
+- Can be reassigned.
+- Cannot be redeclared in the same scope.
+- Hoisted but remains in the Temporal Dead Zone (TDZ) until initialization.
+
+### Example: Block Scope
+
+```javascript
+if (true) {
+    let age = 22;
+}
+
+console.log(age); // ReferenceError
+```
+
+The variable `age` is accessible only inside the block where it was declared.
+
+### Example: Redeclaration
+
+```javascript
+let age = 22;
+
+// SyntaxError
+let age = 23;
+```
+
+However, you can declare another variable with the same name in a different scope.
+
+```javascript
+let age = 22;
+
+{
+    let age = 23;
+    console.log(age); // 23
+}
+
+console.log(age); // 22
+```
+
+---
+
+## 4.3 const
+
+`const` is used to declare variables whose bindings cannot be reassigned.
+
+### Example
+
+```javascript
+const name = "Harsh";
+
+console.log(name);
+```
+
+### Characteristics
+
+- Block-scoped.
+- Cannot be reassigned.
+- Cannot be redeclared in the same scope.
+- Hoisted but remains in the Temporal Dead Zone until initialization.
+- Must be initialized during declaration.
+
+### Example: Reassignment
+
+```javascript
+const age = 22;
+
+age = 23; // TypeError
+```
+
+### Example: Initialization
+
+```javascript
+const age; // SyntaxError
+```
+
+A `const` declaration must have an initial value.
+
+### Important: const with Objects
+
+`const` does not make objects immutable.
+
+It prevents reassignment of the variable binding, not modification of the object's properties.
+
+```javascript
+const user = {
+    name: "Harsh",
+    age: 22
+};
+
+user.age = 23;
+
+console.log(user.age); // 23
+```
+
+This is valid.
+
+However:
+
+```javascript
+user = {
+    name: "Rahul"
+}; // TypeError
+```
+
+The reference stored in `user` cannot be reassigned.
+
+---
+
+## 4.4 Difference Between var, let and const
+
+| Feature | var | let | const |
+|---|---|---|---|
+| Scope | Function | Block | Block |
+| Reassignment | Yes | Yes | No |
+| Redeclaration | Yes | No | No |
+| Hoisting | Yes | Yes | Yes |
+| Initial Value | undefined | TDZ | TDZ |
+| Must initialize | No | No | Yes |
+
+### Which one should you use?
+
+Recommended modern JavaScript practices:
+
+- Use `const` by default.
+- Use `let` when reassignment is required.
+- Avoid `var` in modern JavaScript.
+
+---
+
+## 4.5 Understanding Scope
+
+Scope determines where a variable can be accessed in your program.
+
+JavaScript has three important types of scope.
+
+### 1. Global Scope
+
+Variables declared outside functions and blocks are generally accessible throughout their applicable script or module scope.
+
+```javascript
+let name = "Harsh";
+
+function greet() {
+    console.log(name);
+}
+
+greet(); // Harsh
+```
+
+### 2. Function Scope
+
+Variables declared using `var` inside a function are accessible throughout that function.
+
+```javascript
+function test() {
+    var x = 10;
+    console.log(x); // 10
+}
+
+test();
+
+console.log(x); // ReferenceError
+```
+
+### 3. Block Scope
+
+Variables declared using `let` and `const` are accessible only within their enclosing block.
+
+```javascript
+{
+    let x = 10;
+    const y = 20;
+}
+
+console.log(x); // ReferenceError
+console.log(y); // ReferenceError
+```
+
+### Scope Summary
+
+| Declaration | Global | Function | Block |
+|---|---|---|---|
+| var | Yes* | Yes | No |
+| let | Yes* | Yes | Yes |
+| const | Yes* | Yes | Yes |
+
+*Global declaration behavior depends on whether the code runs in a classic script or an ES module. Top-level declarations in modules are module-scoped.*
+
+---
+
+## 4.6 Understanding Hoisting
+
+Hoisting is JavaScript's behavior of processing declarations before executing the code.
+
+It is important to understand that hoisting does not mean JavaScript physically moves your code to the top.
+
+### Example: var Hoisting
+
+```javascript
+console.log(age); // undefined
+
+var age = 22;
+```
+
+Conceptually, JavaScript processes this as:
+
+```javascript
+var age;
+
+console.log(age); // undefined
+
+age = 22;
+```
+
+The declaration is available before its assignment.
+
+### Example: let Hoisting
+
+```javascript
+console.log(age); // ReferenceError
+
+let age = 22;
+```
+
+`let` is also hoisted, but it cannot be accessed before initialization.
+
+### Example: const Hoisting
+
+```javascript
+console.log(age); // ReferenceError
+
+const age = 22;
+```
+
+The same Temporal Dead Zone behavior applies to `const`.
+
+### What is Temporal Dead Zone (TDZ)?
+
+The Temporal Dead Zone is the period between entering a scope and initializing a `let` or `const` variable.
+
+During this period, accessing the variable results in a ReferenceError.
+
+```javascript
+{
+    // TDZ starts
+
+    console.log(name); // ReferenceError
+
+    let name = "Harsh";
+
+    // TDZ ends
+}
+```
+
+### Hoisting Summary
+
+| Keyword | Hoisted | Initial Value | Accessible Before Declaration |
+|---|---|---|---|
+| var | Yes | undefined | Yes |
+| let | Yes | Uninitialized | No |
+| const | Yes | Uninitialized | No |
+
+---
+
+# 5. JavaScript Data Types
+
+JavaScript is a dynamically typed language.
+
+This means you do not need to explicitly specify the data type when declaring a variable.
+
+```javascript
+let value = 10;
+
+value = "Hello";
+
+value = true;
+```
+
+The same variable can hold values of different types during execution.
+
+JavaScript data types are divided into two major categories:
+
+1. Primitive Data Types
+2. Non-Primitive (Reference) Data Types
+
+---
+
+## 5.1 Primitive Data Types
+
+Primitive values are immutable values that are not objects.
+
+JavaScript has seven primitive data types.
+
+### 1. Number
+
+Used for both integers and floating-point numbers.
+
+```javascript
+let age = 22;
+let price = 99.99;
+
+console.log(typeof age); // number
+console.log(typeof price); // number
+```
+
+Special numeric values include:
+
+```javascript
+let a = Infinity;
+let b = -Infinity;
+let c = NaN;
+```
+
+Note: `NaN` means Not a Number, but its type is still `number`.
+
+### 2. String
+
+Used to represent text.
+
+```javascript
+let name = "Harsh";
+let language = 'JavaScript';
+let message = `Hello ${name}`;
+
+console.log(typeof name); // string
+```
+
+Strings can be written using:
+
+- Single quotes `' '`
+- Double quotes `" "`
+- Backticks `` ` ` ``
+
+### 3. Boolean
+
+Represents logical values.
+
+```javascript
+let isLoggedIn = true;
+let isAdmin = false;
+
+console.log(typeof isLoggedIn); // boolean
+```
+
+### 4. Undefined
+
+A variable declared without an assigned value has the value `undefined`.
+
+```javascript
+let age;
+
+console.log(age); // undefined
+console.log(typeof age); // undefined
+```
+
+### 5. Null
+
+Represents the intentional absence of a value.
+
+```javascript
+let user = null;
+
+console.log(user); // null
+console.log(typeof user); // object
+```
+
+Important: `typeof null` returning `"object"` is a historical JavaScript quirk.
+
+Null is a primitive type, not a reference type.
+
+### 6. BigInt
+
+Used to represent integers larger than the safe integer range of Number.
+
+```javascript
+let largeNumber = 12345678901234567890n;
+
+console.log(typeof largeNumber); // bigint
+```
+
+The `n` suffix identifies a BigInt literal.
+
+### 7. Symbol
+
+Used to create unique identifiers.
+
+```javascript
+let id1 = Symbol("id");
+let id2 = Symbol("id");
+
+console.log(id1 === id2); // false
+console.log(typeof id1); // symbol
+```
+
+Even if two Symbols have the same description, they are unique.
+
+---
+
+## 5.2 Non-Primitive (Reference) Data Types
+
+Non-primitive values are objects.
+
+Variables holding these values contain references to objects rather than the object data itself.
+
+Common examples include:
+
+### 1. Object
+
+Objects store data in key-value pairs.
+
+```javascript
+let user = {
+    name: "Harsh",
+    age: 22,
+    role: "Engineer"
+};
+
+console.log(user.name); // Harsh
+console.log(user.age); // 22
+```
+
+### 2. Array
+
+Arrays store ordered collections of values.
+
+```javascript
+let numbers = [10, 20, 30, 40];
+
+console.log(numbers[0]); // 10
+console.log(typeof numbers); // object
+```
+
+Important: Arrays are objects in JavaScript.
+
+To check whether a value is an array:
+
+```javascript
+console.log(Array.isArray(numbers)); // true
+```
+
+### 3. Function
+
+Functions are reusable blocks of code.
+
+```javascript
+function greet() {
+    console.log("Hello Harsh");
+}
+
+greet();
+
+console.log(typeof greet); // function
+```
+
+Technically, functions are callable objects.
+
+### Other Built-in Objects
+
+- Date
+- Map
+- Set
+- RegExp
+- Error
+- Promise
+
+---
+
+## 5.3 Primitive vs Reference Types
+
+This is one of the most important concepts in JavaScript.
+
+### Primitive Types
+
+Primitive values are immutable and are copied by value.
+
+```javascript
+let a = 10;
+
+let b = a;
+
+b = 20;
+
+console.log(a); // 10
+console.log(b); // 20
+```
+
+Changing `b` does not affect `a`.
+
+### Reference Types
+
+Objects are assigned and passed by sharing their reference.
+
+```javascript
+let user1 = {
+    name: "Harsh"
+};
+
+let user2 = user1;
+
+user2.name = "Rahul";
+
+console.log(user1.name); // Rahul
+console.log(user2.name); // Rahul
+```
+
+Why?
+
+Both variables refer to the same object.
+
+Changing the object's property through one variable is visible through the other.
+
+### Visual Representation
+
+Primitive:
+
+```text
+a = 10
+b = 10
+
+a ───> 10
+b ───> 10
+```
+
+Reference:
+
+```text
+user1 ───┐
+         ├──> { name: "Harsh" }
+user2 ───┘
+```
+
+Both variables point to the same object.
+
+---
+
+## 5.4 Comparing Primitive and Reference Values
+
+### Primitive Comparison
+
+Primitive values are compared by their values.
+
+```javascript
+let a = 10;
+let b = 10;
+
+console.log(a === b); // true
+```
+
+### Reference Comparison
+
+Objects are compared by identity, not by their contents.
+
+```javascript
+let obj1 = {
+    name: "Harsh"
+};
+
+let obj2 = {
+    name: "Harsh"
+};
+
+console.log(obj1 === obj2); // false
+```
+
+Although both objects contain identical properties, they are two different objects.
+
+### Same Reference Comparison
+
+```javascript
+let obj1 = {
+    name: "Harsh"
+};
+
+let obj2 = obj1;
+
+console.log(obj1 === obj2); // true
+```
+
+Both variables reference the same object.
+
+---
+
+## 5.5 Mutability
+
+### Primitive Values Are Immutable
+
+```javascript
+let name = "Harsh";
+
+name.toUpperCase();
+
+console.log(name); // Harsh
+```
+
+Strings are immutable. `toUpperCase()` returns a new string rather than modifying the original.
+
+```javascript
+name = name.toUpperCase();
+
+console.log(name); // HARSH
+```
+
+### Objects Are Mutable
+
+```javascript
+let user = {
+    name: "Harsh",
+    age: 22
+};
+
+user.age = 23;
+
+console.log(user.age); // 23
+```
+
+Object properties can be modified without creating a new object.
+
+---
+
+## 5.6 typeof Operator
+
+The `typeof` operator returns a string indicating the type of a value.
+
+```javascript
+console.log(typeof 10);           // number
+console.log(typeof "Hello");      // string
+console.log(typeof true);         // boolean
+console.log(typeof undefined);    // undefined
+console.log(typeof 10n);          // bigint
+console.log(typeof Symbol());     // symbol
+console.log(typeof {});           // object
+console.log(typeof []);           // object
+console.log(typeof null);         // object
+console.log(typeof function(){}); // function
+```
+
+Remember these important exceptions:
+
+| Expression | Result |
+|---|---|
+| typeof null | "object" |
+| typeof [] | "object" |
+| typeof {} | "object" |
+| typeof function() {} | "function" |
+| typeof NaN | "number" |
+
+---
+
+
+
+
 
 
 
