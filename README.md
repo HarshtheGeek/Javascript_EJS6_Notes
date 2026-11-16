@@ -8,6 +8,7 @@
 - [Variable Declarations](#4-variable-declarations)
 - [JavaScript Data Types](#5-javascript-data-types)
 - [Equality Operators (== vs ===)](#6-equality-operators)
+- [Arrays & Objects](#7-Arrays-&-Objects)
 
 
 # 01 History and Evolution of JavaScript
@@ -1877,6 +1878,286 @@ console.log(Number.isNaN(NaN)); // true
 ### 4. Best Practice
 
 - Prefer `===` over `==` to avoid unexpected type coercion.
+
+
+# 7 Arrays & Objects
+
+## 1. Arrays in JavaScript
+
+An array is a collection of multiple values stored in a single variable.
+
+```javascript
+const arr = [10, 20, 30, 40];
+```
+
+### Accessing Elements
+
+```javascript
+console.log(arr[0]); // 10
+console.log(arr[2]); // 30
+```
+
+### Common Array Methods
+
+| Method | Description |
+|---|---|
+| `push()` | Adds an element at the end |
+| `pop()` | Removes the last element |
+| `unshift()` | Adds an element at the beginning |
+| `shift()` | Removes the first element |
+| `slice()` | Returns a portion of an array without modifying the original |
+| `splice()` | Adds, removes or replaces elements |
+| `includes()` | Checks whether an element exists |
+| `indexOf()` | Returns the index of an element |
+| `join()` | Converts array elements into a string |
+| `reverse()` | Reverses the array |
+| `sort()` | Sorts array elements |
+
+### Important Higher-Order Array Methods
+
+**1. map()**
+
+Creates a new array by applying a function to every element.
+
+```javascript
+const arr = [1, 2, 3];
+
+const result = arr.map(num => num * 2);
+
+console.log(result); // [2, 4, 6]
+```
+
+**2. filter()**
+
+Returns a new array containing elements that satisfy a condition.
+
+```javascript
+const arr = [10, 20, 30, 40];
+
+const result = arr.filter(num => num > 20);
+
+console.log(result); // [30, 40]
+```
+
+**3. reduce()**
+
+Reduces an array to a single value.
+
+```javascript
+const arr = [10, 20, 30];
+
+const sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+console.log(sum); // 60
+```
+
+**4. find()**
+
+Returns the first element that satisfies a condition.
+
+```javascript
+const arr = [10, 20, 30];
+
+const result = arr.find(num => num > 15);
+
+console.log(result); // 20
+```
+
+**5. some()**
+
+Returns `true` if at least one element satisfies a condition.
+
+```javascript
+const arr = [10, 20, 30];
+
+console.log(arr.some(num => num > 25)); // true
+```
+
+**6. every()**
+
+Returns `true` if all elements satisfy a condition.
+
+```javascript
+const arr = [10, 20, 30];
+
+console.log(arr.every(num => num > 5)); // true
+```
+
+---
+
+## 2. Objects in JavaScript
+
+An object is a collection of key-value pairs used to store related data.
+
+```javascript
+const user = {
+    name: "Harsh",
+    age: 22,
+    city: "Bilaspur"
+};
+```
+
+### Accessing Properties
+
+```javascript
+// Dot notation
+console.log(user.name);
+
+// Bracket notation
+console.log(user["age"]);
+```
+
+### Adding Properties
+
+```javascript
+user.email = "harsh@gmail.com";
+```
+
+### Updating Properties
+
+```javascript
+user.age = 23;
+```
+
+### Deleting Properties
+
+```javascript
+delete user.city;
+```
+
+### Checking Properties
+
+```javascript
+console.log("name" in user); // true
+
+console.log(user.hasOwnProperty("age")); // true
+```
+
+### Important Object Methods
+
+| Method | Description |
+|---|---|
+| `Object.keys()` | Returns an array of object keys |
+| `Object.values()` | Returns an array of object values |
+| `Object.entries()` | Returns an array of key-value pairs |
+| `Object.assign()` | Copies properties from source objects |
+| `Object.freeze()` | Prevents adding, deleting or modifying properties |
+| `Object.seal()` | Prevents adding or deleting properties but allows updating existing ones |
+
+### Examples
+
+**Object.keys()**
+
+```javascript
+Object.keys(user);
+// ["name", "age"]
+```
+
+**Object.values()**
+
+```javascript
+Object.values(user);
+// ["Harsh", 23]
+```
+
+**Object.entries()**
+
+```javascript
+Object.entries(user);
+// [["name", "Harsh"], ["age", 23]]
+```
+
+### Object Destructuring
+
+Extracting properties directly into variables.
+
+```javascript
+const { name, age } = user;
+
+console.log(name);
+console.log(age);
+```
+
+### Spread Operator
+
+Used to copy or merge objects.
+
+```javascript
+const newUser = { ...user };
+
+const updatedUser = {
+    ...user,
+    age: 24
+};
+```
+
+---
+
+## 3. Loops in JavaScript
+
+### for Loop
+
+Used to iterate based on an initialization, condition and increment.
+
+```javascript
+const arr = [10, 20, 30];
+
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+}
+```
+
+### for...in Loop
+
+Iterates over enumerable property keys of an object.
+
+```javascript
+const user = {
+    name: "Harsh",
+    age: 22
+};
+
+for (let key in user) {
+    console.log(key);
+}
+```
+
+Output:
+```text
+name
+age
+```
+
+### for...of Loop
+
+Iterates over values of an iterable, such as arrays and strings.
+
+```javascript
+const arr = [10, 20, 30];
+
+for (let value of arr) {
+    console.log(value);
+}
+```
+
+Output:
+```text
+10
+20
+30
+```
+
+### Difference Between for, for...in and for...of
+
+| Loop | Purpose |
+|---|---|
+| `for` | Iterates using an index or condition |
+| `for...in` | Iterates over keys |
+| `for...of` | Iterates over values |
+
+**Remember:**
+- `for...in` → Keys
+- `for...of` → Values
 
 
 
