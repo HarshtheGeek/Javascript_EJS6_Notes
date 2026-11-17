@@ -2159,10 +2159,422 @@ Output:
 - `for...in` → Keys
 - `for...of` → Values
 
+# Functions, Function Expressions & Arrow Functions
 
+## 1. Functions in JavaScript
 
+A function is a reusable block of code designed to perform a particular task. Instead of writing the same code repeatedly, we can define a function once and execute it whenever required.
 
+### Syntax
 
+```javascript
+function functionName(parameters) {
+    // Code to execute
+}
 
+functionName(arguments);
+```
 
+### Example
+
+```javascript
+function greet() {
+    console.log("Hello Harsh");
+}
+
+greet();
+```
+
+**Output:**
+```text
+Hello Harsh
+```
+
+### Parameters vs Arguments
+
+- **Parameters:** Variables defined in the function declaration.
+- **Arguments:** Actual values passed when calling the function.
+
+```javascript
+function add(a, b) {
+    console.log(a + b);
+}
+
+add(10, 20);
+```
+
+Here:
+- `a` and `b` are parameters.
+- `10` and `20` are arguments.
+
+### Return Statement
+
+The `return` statement sends a value back from a function.
+
+```javascript
+function add(a, b) {
+    return a + b;
+}
+
+const result = add(10, 20);
+
+console.log(result); // 30
+```
+
+**Important:**
+- `return` terminates the function execution.
+- A function without an explicit return statement returns `undefined`.
+- `console.log()` displays a value, whereas `return` sends a value back to the caller.
+
+---
+
+## 2. Function Declaration
+
+A function declaration defines a function using the `function` keyword followed by its name.
+
+```javascript
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+```
+
+### Function Hoisting
+
+Function declarations are hoisted with their function definitions.
+
+This means we can call a function before its declaration.
+
+```javascript
+greet();
+
+function greet() {
+    console.log("Hello");
+}
+```
+
+**Output:**
+```text
+Hello
+```
+
+---
+
+## 3. Function Expression
+
+A function expression is a way of creating a function and assigning it to a variable.
+
+Unlike function declarations, the function is created as part of an expression.
+
+### Syntax
+
+```javascript
+const functionName = function() {
+    // Code
+};
+
+functionName();
+```
+
+### Example
+
+```javascript
+const greet = function() {
+    console.log("Hello Harsh");
+};
+
+greet();
+```
+
+**Output:**
+```text
+Hello Harsh
+```
+
+### Anonymous Function
+
+A function expression can use an anonymous function (a function without a name).
+
+```javascript
+const greet = function() {
+    console.log("Hello");
+};
+```
+
+Here:
+- `greet` is the variable.
+- `function()` creates an anonymous function.
+- The function itself is assigned to `greet`.
+- `greet()` executes the function.
+
+**Important:** We are storing the function itself in the variable, not the result of its execution.
+
+### Named Function Expression
+
+A function expression can also have a name.
+
+```javascript
+const greet = function sayHello() {
+    console.log("Hello");
+};
+
+greet();      // Works
+// sayHello(); // ReferenceError
+```
+
+The name `sayHello` is available inside the function's own scope, but not in the surrounding scope.
+
+### Function Expression and Hoisting
+
+Function expressions are not callable before their variable initialization.
+
+```javascript
+greet(); // ReferenceError
+
+const greet = function() {
+    console.log("Hello");
+};
+```
+
+This happens because `const` variables remain in the Temporal Dead Zone (TDZ) until initialization.
+
+---
+
+## 4. Arrow Functions
+
+Arrow functions provide a shorter syntax for writing functions.
+
+They were introduced in ES6 (ECMAScript 2015).
+
+### Syntax
+
+```javascript
+const functionName = (parameters) => {
+    // Code
+};
+```
+
+### Example
+
+```javascript
+const greet = () => {
+    console.log("Hello Harsh");
+};
+
+greet();
+```
+
+**Output:**
+```text
+Hello Harsh
+```
+
+### Arrow Function with Parameters
+
+```javascript
+const add = (a, b) => {
+    return a + b;
+};
+
+console.log(add(10, 20)); // 30
+```
+
+### Implicit Return
+
+If an arrow function contains only a single expression, we can omit the curly braces and `return` keyword.
+
+```javascript
+const add = (a, b) => a + b;
+
+console.log(add(10, 20)); // 30
+```
+
+This is called an implicit return.
+
+### Single Parameter
+
+Parentheses around a single parameter are optional.
+
+```javascript
+const square = num => num * num;
+
+console.log(square(5)); // 25
+```
+
+For zero or multiple parameters, parentheses are required.
+
+```javascript
+const greet = () => console.log("Hello");
+
+const add = (a, b) => a + b;
+```
+
+### Returning an Object
+
+When returning an object implicitly, wrap the object in parentheses.
+
+```javascript
+const getUser = () => ({
+    name: "Harsh",
+    age: 22
+});
+
+console.log(getUser());
+```
+
+Without parentheses, JavaScript interprets the curly braces as a function body.
+
+---
+
+## 5. Function Expression vs Arrow Function
+
+Both can be assigned to variables and used as function expressions.
+
+### Regular Function Expression
+
+```javascript
+const greet = function() {
+    console.log("Hello");
+};
+
+greet();
+```
+
+### Arrow Function Expression
+
+```javascript
+const greet = () => {
+    console.log("Hello");
+};
+
+greet();
+```
+
+Both create functions, but their behavior is not identical.
+
+---
+
+## 6. Understanding `this` in JavaScript
+
+The `this` keyword refers to a value determined by how a function is called (with an important exception for arrow functions).
+
+### A. `this` in Regular Functions
+
+A regular function gets its own `this`, determined by its invocation.
+
+```javascript
+const user = {
+    name: "Harsh",
+
+    greet: function() {
+        console.log(this.name);
+    }
+};
+
+user.greet();
+```
+
+**Output:**
+```text
+Harsh
+```
+
+Why?
+
+1. `user.greet()` calls the function through the `user` object.
+2. Therefore, `this` refers to the `user` object.
+3. `this.name` accesses the object's `name` property.
+
+### B. `this` in Arrow Functions
+
+Arrow functions do not have their own `this`.
+
+Instead, they inherit `this` from their surrounding lexical scope.
+
+```javascript
+const user = {
+    name: "Harsh",
+
+    greet: () => {
+        console.log(this.name);
+    }
+};
+
+user.greet();
+```
+
+The arrow function does not get `this` from the `user` object.
+
+It inherits `this` from the surrounding scope in which the arrow function was created.
+
+Therefore, `this.name` does not necessarily return `"Harsh"`.
+
+### C. Arrow Function Inside a Regular Function
+
+This is an important use case of lexical `this`.
+
+```javascript
+const user = {
+    name: "Harsh",
+
+    greet: function() {
+
+        const sayHello = () => {
+            console.log(this.name);
+        };
+
+        sayHello();
+    }
+};
+
+user.greet();
+```
+
+**Output:**
+```text
+Harsh
+```
+
+Explanation:
+
+1. `user.greet()` invokes a regular function through the `user` object.
+2. Therefore, `this` inside `greet()` refers to `user`.
+3. `sayHello` is an arrow function.
+4. The arrow function inherits `this` from its surrounding regular function.
+5. Therefore, `this.name` returns `"Harsh"`.
+
+**Remember:** Arrow functions are particularly useful for nested callbacks where we want to preserve the surrounding `this`.
+
+---
+
+## 7. Function Declaration vs Function Expression vs Arrow Function
+
+| Feature | Function Declaration | Function Expression | Arrow Function |
+|---|---|---|---|
+| Syntax | `function greet(){}` | `const greet = function(){}` | `const greet = () => {}` |
+| Function name | Required | Optional | Usually anonymous |
+| Hoisting | Callable before declaration | Depends on variable declaration | Depends on variable declaration |
+| Own `this` | Yes | Yes | No |
+| Own `arguments` | Yes | Yes | No |
+| Constructor with `new` | Yes | Yes, if constructable | No |
+
+**Note:** Function expressions and arrow functions are not mutually exclusive categories. An arrow function assigned to a variable is itself a function expression.
+
+---
+
+## 8. Important Things to Remember
+
+1. Functions allow code reusability.
+2. Function declarations use the `function` keyword and a function name.
+3. Function expressions assign a function to a variable.
+4. Arrow functions provide shorter function syntax.
+5. Function declarations are hoisted with their definitions.
+6. `const` and `let` function expressions cannot be accessed before initialization.
+7. Arrow functions do not have their own `this`.
+8. Arrow functions inherit `this` from their surrounding lexical scope.
+9. Regular functions are generally preferred for object methods that need their own `this`.
+10. Arrow functions cannot be used as constructors.
+
+---
 
